@@ -12,6 +12,7 @@ import 'static_content_screen.dart';
 import 'rewards_screen.dart';
 import 'contribute_screen.dart';
 import 'my_contributions_screen.dart';
+import 'community_knowledge_screen.dart';
 import 'profile_screen.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -238,6 +239,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 () => _navigateTo(const ContributeScreen())),
             _buildDrawerItem(Icons.list_alt, "My Contribution",
                 () => _navigateTo(const MyContributionsScreen())),
+            _buildDrawerItem(Icons.library_books, "Community Knowledge",
+                () => _navigateTo(const CommunityKnowledgeScreen())),
             _buildDrawerItem(Icons.currency_rupee, "My Earnings",
                 () => _navigateTo(const RewardsScreen())),
             _buildDrawerItem(Icons.settings, "Settings",

@@ -150,4 +150,50 @@ class FirebaseContributionService {
       print('❌ Error syncing approved knowledge: $e');
     }
   }
+
+  /// Get all approved knowledge (for Community Knowledge screen)
+  static Future<List<Map<String, dynamic>>> getApprovedKnowledge() async {
+    try {
+      final snapshot = await _firestore
+          .collection('approved_knowledge')
+          .orderBy('approvedAt', descending: true)
+          .get();
+
+      return snapshot.docs
+          .map((doc) => {
+                'id': doc.id,
+                ...doc.data(),
+              })
+          .toList();
+    } catch (e) {
+      print('❌ Error fetching approved knowledge: $e');
+      return [];
+    }
+  }
+
+  /// Upvote a contribution
+  static Future<void> upvoteContribution(String docId) async {
+    try {
+      await _firestore.collection('approved_knowledge').doc(docId).update({
+        'upvotes': FieldValue.increment(1),
+      });
+      print('👍 Upvoted contribution: $docId');
+    } catch (e) {
+      print('❌ Error upvoting: $e');
+      rethrow;
+    }
+  }
+
+  /// Downvote a contribution
+  static Future<void> downvoteContribution(String docId) async {
+    try {
+      await _firestore.collection('approved_knowledge').doc(docId).update({
+        'downvotes': FieldValue.increment(1),
+      });
+      print('👎 Downvoted contribution: $docId');
+    } catch (e) {
+      print('❌ Error downvoting: $e');
+      rethrow;
+    }
+  }
 }
