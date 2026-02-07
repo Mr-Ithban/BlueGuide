@@ -92,8 +92,23 @@ Before you begin, ensure you have the following installed:
 
 4. **Configure Firebase**
    - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
-   - Add your Firebase configuration in `lib/config/firebase_config.dart`
-   - Download and add `google-services.json` (Android) and `GoogleService-Info.plist` (iOS)
+   - Enable Firestore Database in your Firebase project
+   - Download configuration files:
+     - `google-services.json` for Android → Place in `android/app/`
+     - `GoogleService-Info.plist` for iOS → Place in `ios/Runner/`
+   - Update `lib/config/firebase_config.dart` with your Firebase credentials:
+     ```dart
+     class FirebaseConfig {
+       static const String apiKey = 'your-api-key';
+       static const String authDomain = 'your-project.firebaseapp.com';
+       static const String projectId = 'your-project-id';
+       static const String storageBucket = 'your-project.appspot.com';
+       static const String messagingSenderId = 'your-sender-id';
+       static const String appId = 'your-app-id';
+       static const String measurementId = 'your-measurement-id';
+     }
+     ```
+   - See [Firebase Flutter Setup Guide](https://firebase.google.com/docs/flutter/setup) for detailed instructions
 
 5. **Run the app**
    ```bash
